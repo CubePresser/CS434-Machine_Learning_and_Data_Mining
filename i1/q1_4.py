@@ -19,15 +19,6 @@ def parseData(path):
 
     return X, Y
 
-# def addRandomFeatures(X, d):
-#     examples = len(X)
-#     for i in range(0, d):
-#         samples = np.random.normal(0, 1, examples)
-#         for k in range(0, examples):
-#             X[k].append(samples[k])
-
-#     return X
-
 def addRandomFeatures(X):
     examples = len(X)
     samples = np.random.normal(0, 1, examples)
@@ -108,7 +99,6 @@ def main():
     plt.plot(x, np.array(trASEData), 'b-', linewidth=2.0, label='Training ASE')
     plt.plot(x, np.array(teASEData), 'r-', linewidth=2.0, label='Testing ASE')
     plt.legend()
-    #plt.legend(handles=[training_patch, testing_patch])
     plt.savefig('q1_4-PLOT')
 
 main()

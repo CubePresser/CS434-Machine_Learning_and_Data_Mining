@@ -18,7 +18,7 @@ def parseCSV(path):
     grayscale = []
     digits = []
     for row in data:
-        row = [float(item) for item in row]
+        row = [float(item)*(1.0/255.0) for item in row]
         grayscale.append(row[0:256])
         digits.append(row[-1])
     grayscale = np.array(grayscale)
@@ -38,23 +38,22 @@ def accuracy(X, Y, w):
             exp = 0
         else:
             exp = np.exp(pow)
-        result = 1 / (1 + exp)
+        result = 1.0 / (1.0 + exp)
 
-        if round(result, 1) == Y[i]:
+        if round(result, 0) == Y[i]:
             success = success + 1
-    
-    return ((float(success) / float(n)) * 100)
+        return ((float(success) / float(n)) * 100)
 
 def main():
-    itr = 50
-    lmb = 1000
-    # trainingData = sys.argv[1]
-    # testingData = sys.argv[2]
-     #sys.argv[3]
-    learn = 0.01 #sys.argv[3]
+    itr = 20
+    lmb = sys.argv[3]
+    arg1 = sys.argv[1]
+    arg2 = sys.argv[2]
+    learn = 0.01
+
     
-    trGrayscale, trDigits = parseCSV('data/usps-4-9-train.csv')
-    teGrayscale, teDigits = parseCSV('data/usps-4-9-test.csv')
+    trGrayscale, trDigits = parseCSV(arg1)
+    teGrayscale, teDigits = parseCSV(arg2)
 
 
     trainingAccuracy = []
@@ -74,8 +73,8 @@ def main():
                     exp = 0
                 else:
                     exp = np.exp(pow)
-                result = 1 / (1 + exp)
-                gradient = gradient + (lmb*w if len(w) else 0) + (trGrayscale[k] * np.subtract(result, trDigits[k])) if len(gradient) else (trGrayscale[k] * np.subtract(result, trDigits[k]))
+                result = 1.0 / (1.0 + exp)
+                gradient = gradient + (trGrayscale[k] * np.subtract(result, trDigits[k])) if len(gradient) else (trGrayscale[k] * np.subtract(result, trDigits[k]))
             w = np.subtract(w, learn * gradient) if len(w) else learn*gradient
     
         trainingAccuracy.append(accuracy(trGrayscale, trDigits, w))
@@ -88,6 +87,6 @@ def main():
     plt.plot(x, trainingAccuracy, 'b-', label="Training")
     plt.plot(x, testingAccuracy, 'r-', label="Testing")
     plt.legend()
-    plt.savefig('q2_3-PLOT-lmb' + str(lmb))
+    plt.savefig('q2_3-PLOT-lmb' + str(lmb).replace('.', ''))
 
 main()

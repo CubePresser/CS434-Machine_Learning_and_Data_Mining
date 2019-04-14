@@ -47,13 +47,13 @@ def accuracy(X, Y, w):
 
 def main():
     itr = 50
-    
-    # trainingData = sys.argv[1]
-    # testingData = sys.argv[2]
-    learn = 0.01 #sys.argv[3]
 
-    trGrayscale, trDigits = parseCSV('data/usps-4-9-train.csv')
-    teGrayscale, teDigits = parseCSV('data/usps-4-9-test.csv')
+    arg1 = sys.argv[1]
+    arg2 = sys.argv[2]
+    learn = float(sys.argv[3])
+
+    trGrayscale, trDigits = parseCSV(arg1)
+    teGrayscale, teDigits = parseCSV(arg2)
 
 
     trainingAccuracy = []

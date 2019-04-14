@@ -14,14 +14,21 @@ python q1_3.py data/housing_train.txt data/housing_test.txt
 echo '
 QUESTION 1 - PART 4
 '
-python q1_4.py data/housing_train.txt data/housing_test.txt
+python q1_4.py data/housing_train.txt data/housing_test.txt 0.01
 
 echo '
 QUESTION 2 - PART 1
 '
-#python q2_1.py data/usps-4-9-test.csv data/usps-4-9-train.csv
+python q2_1.py data/usps-4-9-test.csv data/usps-4-9-train.csv 0.01
 
 echo '
 QUESTION 2 - PART 3
 '
-python q2_3.py data/usps-4-9-test.csv data/usps-4-9-train.csv
+echo 'Lambda 0.01'
+python q2_3.py data/usps-4-9-test.csv data/usps-4-9-train.csv 0.01
+
+echo 'Lambda 10'
+python q2_3.py data/usps-4-9-test.csv data/usps-4-9-train.csv 10
+
+echo 'Lambda 1000'
+python q2_3.py data/usps-4-9-test.csv data/usps-4-9-train.csv 100

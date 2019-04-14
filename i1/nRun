@@ -1,4 +1,0 @@
-#!/bin/bash
-
-clear
-python3 noah.py data/usps-4-9-test.csv data/usps-4-9-train.csv
