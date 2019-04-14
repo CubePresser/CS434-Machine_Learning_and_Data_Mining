@@ -1,0 +1,27 @@
+#!/bin/bash
+
+clear
+echo '
+QUESTION 1 - PART 2
+'
+python q1_2.py data/housing_train.txt data/housing_test.txt
+
+echo '
+QUESTION 1 - PART 3
+'
+python q1_3.py data/housing_train.txt data/housing_test.txt
+
+echo '
+QUESTION 1 - PART 4
+'
+python q1_4.py data/housing_train.txt data/housing_test.txt
+
+echo '
+QUESTION 2 - PART 1
+'
+#python q2_1.py data/usps-4-9-test.csv data/usps-4-9-train.csv
+
+echo '
+QUESTION 2 - PART 3
+'
+python q2_3.py data/usps-4-9-test.csv data/usps-4-9-train.csv
