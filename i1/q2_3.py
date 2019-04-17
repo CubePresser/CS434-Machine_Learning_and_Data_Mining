@@ -13,6 +13,7 @@ def readFile(fileName):
     f = open(fileName, 'r+')
     return csv.reader(f)
 
+#parse csv file and split data into x and y
 def parseCSV(path):
     data = readFile(path)
     grayscale = []
@@ -26,6 +27,8 @@ def parseCSV(path):
 
     return grayscale, digits
 
+#Uses the weight vector from gradient descent to calculate estimated results and compares them with actual
+#results. The number of successful comparisons is tallied up and converted into a percentage at the end and returned
 def accuracy(X, Y, w):
     success = 0
     n = len(X)
@@ -40,12 +43,13 @@ def accuracy(X, Y, w):
             exp = np.exp(pow)
         result = 1.0 / (1.0 + exp)
 
+        #round results to either 0 or 1
         if round(result, 0) == Y[i]:
             success = success + 1
         return ((float(success) / float(n)) * 100)
 
 def main():
-    itr = 20
+    itr = 20 #iterate 20 times
     lmb = sys.argv[3]
     arg1 = sys.argv[1]
     arg2 = sys.argv[2]
@@ -62,6 +66,7 @@ def main():
     for f in range(1, itr):
         n = len(trGrayscale)
         w = np.array([])
+        # a single iteration
         for i in range(f):
             gradient = np.array([])
             for k in range(0, n):
@@ -77,9 +82,11 @@ def main():
                 gradient = gradient + (trGrayscale[k] * np.subtract(result, trDigits[k])) if len(gradient) else (trGrayscale[k] * np.subtract(result, trDigits[k]))
             w = np.subtract(w, learn * gradient) if len(w) else learn*gradient
     
+        # store training accuracy at specific lambda
         trainingAccuracy.append(accuracy(trGrayscale, trDigits, w))
         testingAccuracy.append(accuracy(teGrayscale, teDigits, w))
 
+    #plot results
     x = np.arange(1, itr)
     plt.xlabel('Iterations')
     plt.ylabel('Accuracy')
