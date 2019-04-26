@@ -1,0 +1,4 @@
+#!/bin/bash
+
+clear
+python q2_2.py data/knn_train.csv data/knn_test.csv
