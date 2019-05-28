@@ -1,4 +1,3 @@
-from sklearn.cluster import KMeans
 import numpy as np
 import pandas as pd
 import sys
@@ -85,6 +84,8 @@ def main():
     
     # pick K random points for centroids
     C = data.sample(k)
+
+    iterations = 10
 
     sseByIteration = [0] * iterations
     for i in range(iterations):
