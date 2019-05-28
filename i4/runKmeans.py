@@ -81,9 +81,9 @@ def SSE(data, centroids, clusters):
 def main():
     data = pd.read_csv('p4-data.txt', header=None).divide(255)
     iterations = 10
-    kSSEs = [0] * 2
+    kSSEs = [0] * 9
 
-    for k in range(2, 3):
+    for k in range(2, 11):
         lowestSSE = sys.maxsize
         for iter in range(10):
             # pick K random points for centroids
@@ -104,7 +104,7 @@ def main():
     plt.figure()
     plt.xlabel('k')
     plt.ylabel('Sum of Squared Error')
-    plt.plot(np.arange(2, 4), kSSEs, 'b-')
+    plt.plot(np.arange(2, 11), kSSEs, 'b-')
     plt.title('SSE vs k')
     plt.savefig('SSEvK')
 main()
