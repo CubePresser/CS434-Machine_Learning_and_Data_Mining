@@ -26,9 +26,13 @@ def parseCSV(path):
 
     return grayscale, digits
 
+#Uses the weight vector from gradient descent to calculate estimated results and compares them with actual
+#results. The number of successful comparisons is tallied up and converted into a percentage at the end and returned
 def accuracy(X, Y, w):
     success = 0
     n = len(X)
+
+    #For every example in X
     for i in range(0, n):
         wT = np.multiply(w.T, -1)
         pow = np.dot(wT, X[i])
@@ -80,6 +84,7 @@ def main():
         trainingAccuracy.append(accuracy(trGrayscale, trDigits, w))
         testingAccuracy.append(accuracy(teGrayscale, teDigits, w))
 
+    #plot data
     x = np.arange(1, itr)
     plt.xlabel('Gradient Descent Iterations')
     plt.ylabel('Accuracy')

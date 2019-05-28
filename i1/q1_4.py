@@ -19,6 +19,7 @@ def parseData(path):
 
     return X, Y
 
+#Adds a feature column to X with random values derived from a standard normal distribution
 def addRandomFeatures(X):
     examples = len(X)
     samples = np.random.normal(0, 1, examples)
@@ -26,7 +27,6 @@ def addRandomFeatures(X):
         X[k].append(samples[k])
 
     return np.array(X)
-
 
 def calcWeight(X, Y):
     return np.linalg.inv(np.dot(X.T, X)).dot(X.T).dot(Y)
@@ -76,13 +76,16 @@ def main():
     trData, trRes = parseData(arg1)
     teData, teRes = parseData(arg2)
 
+    #Get average squared errors and display resulting ASE's
     trASE, teASE = displayResults(trData, trRes, teData, teRes)
 
+    #Add ASEs to the list of all ASEs for plot
     trASEData.append(trASE)
     teASEData.append(teASE)
 
     for i in range(1, d+1):
 
+        #Add random features to both train and test data
         trData = addRandomFeatures(trData.tolist())
         teData = addRandomFeatures(teData.tolist())
 
@@ -91,6 +94,7 @@ def main():
         trASEData.append(trASE)
         teASEData.append(teASE)
 
+    #Create plot
     x = np.arange(0, d+1)
     plt.title('ASE as Random Features Increases')
     plt.xlabel('Number of Random Features')

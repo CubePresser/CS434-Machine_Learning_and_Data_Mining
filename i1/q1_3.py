@@ -13,15 +13,18 @@ def parseData(path):
     Y = np.array(Y)
     return X, Y
 
+#Uses weight equation to get weight vector
 def calcWeight(X, Y):
     return np.linalg.inv(np.dot(X.T, X)).dot(X.T).dot(Y)
 
+#Calculates estimated results using weight vector and data matrix
 def calcResults(X, W):
     results = []
     for row in X:
         results.append(np.dot(row, W))
     return results
 
+#Calculates average squared error
 def getASE(Y0, Y1):
     n = len(Y0)
     sum = 0
@@ -29,12 +32,14 @@ def getASE(Y0, Y1):
         sum += (Y0[i] - Y1[i])**2
     return (sum / n)
 
+#Shows the weighted results
 def displayResults(trData, trRes, teData, teRes):
     weight = calcWeight(trData, trRes)
 
     print("Learned Weight Vector")
     print(weight)
 
+    #Gets results
     trY1 = calcResults(trData, weight)
     teY1 = calcResults(teData, weight)
     trASE = getASE(trRes, trY1)
